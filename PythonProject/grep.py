@@ -32,3 +32,22 @@ def ignore_case_search(text, file):
                 print("Found on line %s: %s" % (i + 1, line))
     except Exception as e:
         print(str(e))
+
+
+def count_regex_match(regex, file):
+    """
+    Opțiunea de tipul “COUNT” care sa spuna de cate ori se face sau match la o expresie regulată într-un fișier.
+
+    :param regex: expresia regulata dupa care se face cautarea
+    :param file: fisierul in care se face cautarea
+    :return: numarul de substringuri care respecta expresia regulata regex in fisierul file
+    """
+    try:
+        count = 0
+        r = re.compile(regex)
+        for line in open(file):
+            if r.search(line):
+                count += 1
+        return count
+    except Exception as e:
+        print(str(e))
