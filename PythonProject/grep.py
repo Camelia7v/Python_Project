@@ -1,4 +1,5 @@
 import re
+import os
 
 
 def regex_search_in_a_file(regex, file):
@@ -51,3 +52,24 @@ def count_regex_match(regex, file):
         return count
     except Exception as e:
         print(str(e))
+
+
+def regex_recursive_search_in_a_director(regex, director):
+    """
+    Cautare recursiva intr-un folder a unui expresii regulate.
+
+    :param regex: expresia regulata dupa care se face cautarea
+    :param director: folderul in care se face cautarea
+    :return: afișează toate liniile care au un substring care respecta expresia regulată regex si numele fisierelor
+     din director in care le-a gasit
+    """
+    r = re.compile(regex)
+    for (root, directories, files) in os.walk(director):
+        for file_name in files:
+            try:
+                full_path = open(os.path.join(root, file_name), "r")
+                for line in full_path:
+                    if r.search(line):
+                        print("%s: %s" % (file_name, line))
+            except Exception as e:
+                print(str(e))
