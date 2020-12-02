@@ -73,3 +73,20 @@ def regex_recursive_search_in_a_director(regex, director):
                         print("%s: %s" % (file_name, line))
             except Exception as e:
                 print(str(e))
+
+
+def regex_not_matching(regex, file):
+    """
+    Opțiunea de tipul “NOT” care să verifice ca o anumită expresie regulată NU face match într-un fișier.
+
+    :param regex: expresia regulata dupa care se face cautarea
+    :param file: fisierul in care se face cautarea
+    :return: afișează toate liniile din file in care NU se gaseste un substring care respecta expresia regulată regex
+    """
+    try:
+        r = re.compile(regex)
+        for i, line in enumerate(open(file)):
+            if not r.search(line):
+                print("NOT found on line %s: %s" % (i + 1, line))
+    except Exception as e:
+        print(str(e))
