@@ -31,9 +31,9 @@ def ignore_case_search(text, file):
         for i, line in enumerate(open(file)):
             if text.lower() in line.lower():
                 found.append("Found on line %s: %s" % (i + 1, line))
-        return found
     except Exception as e:
         print(str(e))
+    return found
 
 
 def count_regex_match(regex, file):
@@ -50,9 +50,9 @@ def count_regex_match(regex, file):
         for line in open(file):
             if r.search(line):
                 count += 1
-        return count
     except Exception as e:
         print(str(e))
+    return count
 
 
 def regex_not_matching(regex, file, *options):
@@ -74,9 +74,9 @@ def regex_not_matching(regex, file, *options):
                     for line in open(file):
                         if regex.lower() not in line.lower():
                             count += 1
-                    return count
                 except Exception as e:
                     print(str(e))
+                return count
         else:
             if options[0] == "ignoreCase":
                 try:
@@ -92,9 +92,9 @@ def regex_not_matching(regex, file, *options):
                     for line in open(file):
                         if not r.search(line):
                             count += 1
-                    return count
                 except Exception as e:
                     print(str(e))
+                return count
     else:
         try:
             r = re.compile(regex)
